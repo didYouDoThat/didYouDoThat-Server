@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/login", (req, res, next) => {
-  console.log(req);
-});
+const authController = require("./controllers/auth");
+const verifyGoogleIdToken = require("./middleware/verifyGoogleIdToken");
 
-router.get("/logout", (req, res, next) => {
-  console.log(req);
-});
+router.get("/login", verifyGoogleIdToken, authController.getLogin);
+//logout에 verifyToken 미들웨어 체크해줄 것.
+router.get("/logout", authController.getLogout);
 
 module.exports = router;
