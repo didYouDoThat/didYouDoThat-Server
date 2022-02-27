@@ -19,12 +19,7 @@ exports.getLogin = async (req, res, next) => {
       token: accessToken,
     });
   } catch (err) {
-    console.log(err);
     const error = createError(500, err, { message: "Invalid Server Error" });
     next(error);
   }
-};
-
-exports.getLogout = async (req, res, next) => {
-  console.log(req);
 };
