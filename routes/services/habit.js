@@ -13,12 +13,16 @@ exports.getHabitList = async (userId) => {
     });
 
   const activeHabits = targetUser.habits
-    .filter(
-      (habit) =>
+    .filter((habit) => {
+      return (
         new Date(habit.dateList[habit.dateList.length - 1].date) -
           currentDate >=
-        60 * 60 * 24 * 1000
-    )
+          60 * 60 * 24 * 1000 ||
+        currentDate -
+          new Date(habit.dateList[habit.dateList.length - 1].date) <=
+          2 * 60 * 60 * 24 * 1000
+      );
+    })
     .map((activeHabit) => {
       return {
         id: activeHabit._id,
