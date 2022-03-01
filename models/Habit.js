@@ -26,10 +26,6 @@ const HabitSchema = new Schema({
       },
     },
   ],
-  endDate: {
-    type: String,
-    required: [true, SCHEMA_MESSAGE.habitEndDateError],
-  },
   catImage: {
     catType: {
       type: Schema.Types.ObjectId,
@@ -40,10 +36,6 @@ const HabitSchema = new Schema({
       type: Number,
       required: [true, SCHEMA_MESSAGE.habitCatStatusError],
     },
-  },
-  isActive: {
-    type: Boolean,
-    required: [true, SCHEMA_MESSAGE.habitActivationError],
   },
 });
 
