@@ -2,6 +2,8 @@ const User = require("../../models/User");
 const Habit = require("../../models/Habit");
 const CatImage = require("../../models/CatImage");
 
+const { TIME_NUMBERS } = require("../../constants/numbers");
+
 exports.getHabitList = async (userId) => {
   const currentDate = new Date();
 
@@ -17,10 +19,10 @@ exports.getHabitList = async (userId) => {
       return (
         new Date(habit.dateList[habit.dateList.length - 1].date) -
           currentDate >=
-          60 * 60 * 24 * 1000 ||
+          TIME_NUMBERS.checkTimeForActiveness ||
         currentDate -
           new Date(habit.dateList[habit.dateList.length - 1].date) <=
-          2 * 60 * 60 * 24 * 1000
+          2 * TIME_NUMBERS.checkTimeForActiveness
       );
     })
     .map((activeHabit) => {

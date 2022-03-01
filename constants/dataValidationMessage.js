@@ -12,3 +12,16 @@ exports.SCHEMA_MESSAGE = {
   habitActivationError: "Activation information is required.",
   catImageUrlError: "Image link for a single cat is required.",
 };
+
+exports.TOKEN_MESSAGE = {
+  tokenError: "Invalid token from client.",
+  emptyTokenError: "Empty token request from client",
+};
+
+exports.AUTH_MESSAGE = {
+  invalidUser: "Invalid user",
+};
+
+exports.COMMON_MESSAGE = {
+  invalidServerError: "Invalid server error",
+};
