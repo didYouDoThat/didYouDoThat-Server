@@ -21,6 +21,7 @@ exports.getHabitList = async (userId) => {
           activeHabit.catImage.catType.catStatusList[
             activeHabit.catImage.catStatus
           ],
+        status: activeHabit.catImage.catStatus,
       };
     });
 
