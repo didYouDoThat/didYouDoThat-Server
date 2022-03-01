@@ -18,7 +18,7 @@ exports.getHabitList = async (req, res, next) => {
     const targetHabitList = await habitService.getHabitList(userId);
 
     res.json({
-      result: "good",
+      habitList: targetHabitList,
     });
   } catch (err) {
     const error = createError(500, err, { message: "Invalid Server Error" });
