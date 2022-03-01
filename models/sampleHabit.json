@@ -1,0 +1,82 @@
+[
+  {
+    "author": "621a78a7725ac002636cf6c6",
+    "title": "물 800ml 마시기",
+    "dateList": [
+      {
+        "date": "2022-02-25T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-02-26T00:00:00.099Z",
+        "isChecked": true
+      },
+      {
+        "date": "2022-02-27T00:00:00.099Z",
+        "isChecked": true
+      },
+      {
+        "date": "2022-02-28T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-03-01T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-03-02T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-03-03T00:00:00.099Z",
+        "isChecked": false
+      }
+    ],
+    "endDate": "2022-03-03T00:00:00.099Z",
+    "catImage": {
+      "catType": "621bbb3c2a3a3ca6871c6e22",
+      "catStatus": 2
+    },
+    "isActive": true
+  },
+  {
+    "author": "621a78a7725ac002636cf6c6",
+    "title": "비타민D 약 먹기",
+    "dateList": [
+      {
+        "date": "2022-02-01T00:00:00.099Z",
+        "isChecked": true
+      },
+      {
+        "date": "2022-02-02T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-02-03T00:00:00.099Z",
+        "isChecked": true
+      },
+      {
+        "date": "2022-02-04T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-02-05T00:00:00.099Z",
+        "isChecked": false
+      },
+      {
+        "date": "2022-02-06T00:00:00.099Z",
+        "isChecked": true
+      },
+      {
+        "date": "2022-02-07T00:00:00.099Z",
+        "isChecked": true
+      }
+    ],
+    "endDate": "2022-02-07T00:00:00.099Z",
+    "catImage": {
+      "catType": "621bbb3c2a3a3ca6871c6e24",
+      "catStatus": 4
+    },
+    "isActive": false
+  }
+]

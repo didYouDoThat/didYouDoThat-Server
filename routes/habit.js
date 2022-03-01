@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/:userId", (req, res, next) => {
-  console.log(req);
-});
+const habitController = require("../routes/controllers/habit");
+
+router.get("/:userId", habitController.getHabitList);
 
 router.post("/:userId/habit", (req, res, next) => {
   console.log(req);

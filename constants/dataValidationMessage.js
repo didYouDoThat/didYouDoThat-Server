@@ -2,6 +2,7 @@ exports.SCHEMA_MESSAGE = {
   userEmailUniqueError: "Email should be unique.",
   userEmailRequiredError: "Email information is required.",
   userNameError: "Name information is required.",
+  habitAuthorError: "Author information is required.",
   habitTitleError: "Title information is required.",
   habitDateListDateError: "Date information for key is required.",
   habitCheckedError: "Checked status is required.",

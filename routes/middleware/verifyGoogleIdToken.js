@@ -4,17 +4,15 @@ const createError = require("http-errors");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const verifyGoogleIdToken = async (req, res, next) => {
-  const { authorization } = req.headers;
-
-  if (!authorization) {
-    const error = createError(401, { message: "Unauthorized" });
+  const { idToken } = req.body;
+  
+  if (!idToken) {
+    const error = createError(400, { message: "Bad request" });
     next(error);
-    
+
     return;
   }
 
-  const idToken = authorization.split(" ")[1];
-  
   try {
     const ticket = await client.verifyIdToken({ idToken });
     const { email, name } = ticket.getPayload();
