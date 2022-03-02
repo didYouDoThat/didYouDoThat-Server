@@ -3,6 +3,7 @@ const Habit = require("../../models/Habit");
 const CatImage = require("../../models/CatImage");
 
 const { TIME_NUMBERS } = require("../../constants/numbers");
+const makeDateListData = require("../../utils/makeDateListData");
 
 exports.getHabitList = async (userId) => {
   const currentDate = new Date();
@@ -39,4 +40,32 @@ exports.getHabitList = async (userId) => {
     });
 
   return activeHabits;
+};
+
+exports.postNewHabit = async (title, userId) => {
+  const currentDate = new Date();
+  
+  const catImageList = await CatImage.find().lean().exec();
+  const catImageIndex = Math.floor(Math.random() * 7);
+  const dateList = makeDateListData(currentDate);
+
+  const newHabit = await Habit.create({
+    author: userId,
+    title,
+    dateList,
+    catImage: {
+      catType: catImageList[catImageIndex]._id,
+      catStatus: 0,
+    }
+  });
+
+  await User.findByIdAndUpdate(userId, { $push: { habits: newHabit._id } });
+
+  return {
+    id: newHabit._id,
+    title,
+    endDate: newHabit.dateList[newHabit.dateList.length - 1].date,
+    catImage: catImageList[catImageIndex].catStatusList[0],
+    status: newHabit.catImage.catStatus,
+  };
 };
