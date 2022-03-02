@@ -62,10 +62,8 @@ exports.postNewHabit = async (title, userId) => {
   await User.findByIdAndUpdate(userId, { $push: { habits: newHabit._id } });
 
   return {
-    id: newHabit._id,
     title,
     endDate: newHabit.dateList[newHabit.dateList.length - 1].date,
-    catImage: catImageList[catImageIndex].catStatusList[0],
-    status: newHabit.catImage.catStatus,
+    catImage: catImageList[catImageIndex].catStatusList[4],
   };
 };
