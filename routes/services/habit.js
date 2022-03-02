@@ -44,7 +44,7 @@ exports.getHabitList = async (userId) => {
 
 exports.postNewHabit = async (title, userId) => {
   const currentDate = new Date();
-  
+
   const catImageList = await CatImage.find().lean().exec();
   const catImageIndex = Math.floor(Math.random() * 7);
   const dateList = makeDateListData(currentDate);
@@ -56,7 +56,7 @@ exports.postNewHabit = async (title, userId) => {
     catImage: {
       catType: catImageList[catImageIndex]._id,
       catStatus: 0,
-    }
+    },
   });
 
   await User.findByIdAndUpdate(userId, { $push: { habits: newHabit._id } });
