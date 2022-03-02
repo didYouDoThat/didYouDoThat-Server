@@ -31,3 +31,29 @@ exports.getHabitList = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.postNewHabit = async (req, res, next) => {
+  // req.body validation needed
+  const { userId } = req.params;
+  const { title } = req.body;
+
+  if (!ObjectId.isValid(userId)) {
+    const error = createError(400, { message: AUTH_MESSAGE.invalidUser });
+    next(error);
+
+    return;
+  }
+
+  try {
+    const newHabit = await habitService.postNewHabit(title, userId);
+
+    res.json({
+      newHabit,
+    });
+  } catch (err) {
+    const error = createError(500, err, {
+      message: COMMON_MESSAGE.invalidServerError,
+    });
+    next(error);
+  }
+};
