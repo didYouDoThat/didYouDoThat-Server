@@ -20,6 +20,7 @@ exports.TOKEN_MESSAGE = {
 
 exports.AUTH_MESSAGE = {
   invalidUser: "Invalid user",
+  invalidObjectIds: "Invalid user or habit",
 };
 
 exports.COMMON_MESSAGE = {
