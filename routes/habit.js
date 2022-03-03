@@ -6,11 +6,7 @@ const verifyToken = require("./middleware/verifyToken");
 
 router.get("/:userId", verifyToken, habitController.getHabitList);
 router.post("/:userId/habit", verifyToken, habitController.postNewHabit);
-
-router.put("/:userId/habits/:habitId", verifyToken, (req, res, next) => {
-  console.log(req);
-});
-
+router.put("/:userId/habits/:habitId", habitController.updateHabitStatus);
 router.delete("/:userId/habits/:habitId", verifyToken, habitController.deleteHabit);
 
 module.exports = router;

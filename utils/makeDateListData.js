@@ -1,6 +1,6 @@
 const makeDateListData = (currentDate) => {
-  const nowDate = new Date();
-  const initialStartDate = new Date(currentDate.setUTCHours(0, 0, 0));
+  const nowDate = new Date(currentDate);
+  const initialStartDate = new Date(new Date(currentDate).setUTCHours(0, 0, 0));
   const startDate = new Date(initialStartDate.setDate(nowDate.getDate()));
 
   const dateList = [{
@@ -19,6 +19,7 @@ const makeDateListData = (currentDate) => {
     });
   }
 
+  console.log(dateList);
   return dateList;
 };
 
