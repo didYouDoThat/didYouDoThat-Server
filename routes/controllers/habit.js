@@ -57,3 +57,28 @@ exports.postNewHabit = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteHabit = async (req, res, next) => {
+  const { userId, habitId } = req.params;
+
+  if (!ObjectId.isValid(userId) || !ObjectId.isValid(habitId)) {
+    // habitId에 대해서 오류인 경우의 메시지도 업데이트 해줘야 함.
+    const error = createError(400, { message: AUTH_MESSAGE.invalidUser });
+    next(error);
+
+    return;
+  }
+
+  try {
+    await habitService.deleteHabit(habitId, userId);
+
+    res.json({
+      result: "success",
+    });
+  } catch (err) {
+    const error = createError(500, err, {
+      message: COMMON_MESSAGE.invalidServerError,
+    });
+    next(error);
+  }
+};

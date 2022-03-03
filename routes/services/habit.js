@@ -67,3 +67,8 @@ exports.postNewHabit = async (title, userId) => {
     catImage: catImageList[catImageIndex].catStatusList[4],
   };
 };
+
+exports.deleteHabit = async (habitId, userId) => {
+  await User.findByIdAndUpdate(userId, { $pull: { habits: habitId } });
+  await Habit.findOneAndRemove(habitId);
+};
