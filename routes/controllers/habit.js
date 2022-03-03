@@ -62,15 +62,14 @@ exports.deleteHabit = async (req, res, next) => {
   const { userId, habitId } = req.params;
 
   if (!ObjectId.isValid(userId) || !ObjectId.isValid(habitId)) {
-    // habitId에 대해서 오류인 경우의 메시지도 업데이트 해줘야 함.
-    const error = createError(400, { message: AUTH_MESSAGE.invalidUser });
+    const error = createError(400, { message: AUTH_MESSAGE.invalidObjectIds });
     next(error);
 
     return;
   }
 
   try {
-    await habitService.deleteHabit(habitId, userId);
+    const response = await habitService.deleteHabit(habitId, userId);
 
     res.json({
       result: "success",
