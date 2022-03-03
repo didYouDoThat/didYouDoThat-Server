@@ -19,7 +19,6 @@ const makeDateListData = (currentDate) => {
     });
   }
 
-  console.log(dateList);
   return dateList;
 };
 
