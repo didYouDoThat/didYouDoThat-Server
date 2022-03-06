@@ -36,8 +36,6 @@ exports.getExpiredHabitList = async (
   localTime,
   page
 ) => {
-  console.log("heelllllo");
-  
   const targetUser = await User.findById(userId)
     .populate("habits")
     .populate({
