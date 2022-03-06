@@ -2,7 +2,6 @@ const User = require("../../models/User");
 const Habit = require("../../models/Habit");
 const CatImage = require("../../models/CatImage");
 
-const { TIME_NUMBERS } = require("../../constants/numbers");
 const makeDateListData = require("../../utils/makeDateListData");
 
 exports.getHabitList = async (userId) => {
@@ -13,32 +12,75 @@ exports.getHabitList = async (userId) => {
       populate: { path: "catImage.catType" },
     });
 
-  const activeHabits = targetUser.habits
-    // .filter((habit) => {
-    //   return (
-    //     new Date(habit.dateList[habit.dateList.length - 1].date) -
-    //       currentDate >=
-    //       TIME_NUMBERS.checkTimeForActiveness ||
-    //     currentDate -
-    //       new Date(habit.dateList[habit.dateList.length - 1].date) <=
-    //       2 * TIME_NUMBERS.checkTimeForActiveness
-    //   );
-    // })
-    .map((activeHabit) => {
+  const activeHabits = targetUser.habits.map((activeHabit) => {
+    return {
+      id: activeHabit._id,
+      title: activeHabit.title,
+      endDate: activeHabit.dateList[activeHabit.dateList.length - 1].date,
+      dateList: activeHabit.dateList,
+      catImage:
+        activeHabit.catImage.catType.catStatusList[
+          activeHabit.catImage.catStatus
+        ],
+      status: activeHabit.catImage.catStatus,
+    };
+  });
+
+  return activeHabits;
+};
+
+exports.getExpiredHabitList = async (
+  userId,
+  limit,
+  status,
+  localTime,
+  page
+) => {
+  console.log("heelllllo");
+  
+  const targetUser = await User.findById(userId)
+    .populate("habits")
+    .populate({
+      path: "habits",
+      populate: { path: "catImage.catType" },
+    });
+
+  const expiredHabitList = targetUser.habits
+    .filter((habit) => {
+      return (
+        new Date(localTime) -
+          new Date(habit.dateList[habit.dateList.length - 1].date) >
+          0 &&
+        (status === "success"
+          ? habit.catImage.catStatus === 7
+          : habit.catImage.catStatus !== 7)
+      );
+    })
+    .map((expiredHabit) => {
       return {
-        id: activeHabit._id,
-        title: activeHabit.title,
-        endDate: activeHabit.dateList[activeHabit.dateList.length - 1].date,
-        dateList: activeHabit.dateList,
+        id: expiredHabit._id,
+        title: expiredHabit.title,
+        endDate: expiredHabit.dateList[expiredHabit.dateList.length - 1].date,
+        dateList: expiredHabit.dateList,
         catImage:
-          activeHabit.catImage.catType.catStatusList[
-            activeHabit.catImage.catStatus
+          expiredHabit.catImage.catType.catStatusList[
+            expiredHabit.catImage.catStatus
           ],
-        status: activeHabit.catImage.catStatus,
+        status: expiredHabit.catImage.catStatus,
       };
     });
 
-  return activeHabits;
+  const finalExpiredHabitList = expiredHabitList.slice(
+    Number(limit) * (Number(page) - 1),
+    Number(limit) * Number(page)
+  );
+  const nextPage = Number(page) + 1;
+
+  return {
+    expiredHabitList: finalExpiredHabitList,
+    status,
+    nextPage,
+  };
 };
 
 exports.postNewHabit = async (title, currentDate, userId) => {
