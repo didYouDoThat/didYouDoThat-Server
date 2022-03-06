@@ -19,11 +19,22 @@ exports.getHabitList = async (req, res, next) => {
   }
 
   try {
-    const targetHabitList = await habitService.getHabitList(userId);
+    if (!Object.keys(req.query).length) {
+      const targetHabitList = await habitService.getHabitList(userId);
 
-    res.json({
-      habitList: targetHabitList,
-    });
+      res.json({
+        habitList: targetHabitList,
+      });
+    } else {
+      const { limit, status, localTime, page } = req.query;
+      const { expiredHabitList, nextPage } =
+        await habitService.getExpiredHabitList(userId, limit, status, localTime, page);
+
+      res.json({
+        habitList: expiredHabitList,
+        nextPage,
+      });
+    }
   } catch (err) {
     const error = createError(500, err, {
       message: COMMON_MESSAGE.invalidServerError,
