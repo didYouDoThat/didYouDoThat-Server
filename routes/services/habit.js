@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const Habit = require("../../models/Habit");
 const CatImage = require("../../models/CatImage");
 
+const { HABIT_NUMBERS } = require("../../constants/numbers");
 const makeDateListData = require("../../utils/makeDateListData");
 
 exports.getHabitList = async (userId) => {
@@ -50,8 +51,8 @@ exports.getExpiredHabitList = async (
           new Date(habit.dateList[habit.dateList.length - 1].date) >
           0 &&
         (status === "success"
-          ? habit.catImage.catStatus === 7
-          : habit.catImage.catStatus !== 7)
+          ? habit.catImage.catStatus === HABIT_NUMBERS.habitSuccessStatus
+          : habit.catImage.catStatus !== HABIT_NUMBERS.habitSuccessStatus)
       );
     })
     .map((expiredHabit) => {
@@ -92,7 +93,7 @@ exports.postNewHabit = async (title, currentDate, userId) => {
     dateList,
     catImage: {
       catType: catImageList[catImageIndex]._id,
-      catStatus: 0,
+      catStatus: HABIT_NUMBERS.initialStatus,
     },
   });
 
@@ -125,7 +126,7 @@ exports.updateHabitStatus = async (currentLocalDate, habitId) => {
     }
   });
 
-  let currentStatus = 0;
+  let currentStatus = HABIT_NUMBERS.initialStatus;
   updatedHabitList.forEach(({ date, isChecked }) => {
     if (isChecked) currentStatus++;
   });
