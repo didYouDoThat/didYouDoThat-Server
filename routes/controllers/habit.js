@@ -6,6 +6,7 @@ const {
   AUTH_MESSAGE,
   COMMON_MESSAGE,
 } = require("../../constants/dataValidationMessage");
+const { RESPONSE_MESSAGE } = require("../../constants/responseMessage");
 const habitService = require("../services/habit");
 
 exports.getHabitList = async (req, res, next) => {
@@ -96,7 +97,7 @@ exports.updateHabitStatus = async (req, res, next) => {
     );
 
     res.json({
-      result: "success",
+      result: RESPONSE_MESSAGE.success,
     });
   } catch (err) {
     const error = createError(500, err, {
@@ -120,7 +121,7 @@ exports.deleteHabit = async (req, res, next) => {
     const response = await habitService.deleteHabit(habitId, userId);
 
     res.json({
-      result: "success",
+      result: RESPONSE_MESSAGE.success,
     });
   } catch (err) {
     const error = createError(500, err, {
