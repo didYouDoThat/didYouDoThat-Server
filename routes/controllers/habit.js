@@ -44,7 +44,6 @@ exports.getHabitList = async (req, res, next) => {
 };
 
 exports.postNewHabit = async (req, res, next) => {
-  // req.body validation needed
   const { userId } = req.params;
   const { title, currentDate } = req.body;
 
@@ -74,7 +73,6 @@ exports.postNewHabit = async (req, res, next) => {
 };
 
 exports.updateHabitStatus = async (req, res, next) => {
-  //reqbody validation needed
   const { userId, habitId } = req.params;
   const { currentLocalDate } = req.body;
 
