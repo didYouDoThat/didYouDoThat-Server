@@ -13,6 +13,12 @@ exports.SCHEMA_MESSAGE = {
   catImageUrlError: "Image link for a single cat is required.",
 };
 
+exports.REQBODY_MESSAGE = {
+  habitTitleError: "Title should be string.",
+  habitCurrentDateError: "CurrentData should be string.",
+  updateHabitDateError: "CurrentLocalDate should be ISO string.",
+};
+
 exports.TOKEN_MESSAGE = {
   tokenError: "Invalid token from client.",
   emptyTokenError: "Empty token request from client",

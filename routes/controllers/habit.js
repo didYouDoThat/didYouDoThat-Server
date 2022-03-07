@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 const createError = require("http-errors");
 
-const habitService = require("../services/habit");
 const {
   AUTH_MESSAGE,
   COMMON_MESSAGE,
 } = require("../../constants/dataValidationMessage");
+const { RESPONSE_MESSAGE } = require("../../constants/responseMessage");
+const habitService = require("../services/habit");
 
 exports.getHabitList = async (req, res, next) => {
   const { userId } = req.params;
@@ -28,7 +29,13 @@ exports.getHabitList = async (req, res, next) => {
     } else {
       const { limit, status, localTime, page } = req.query;
       const { expiredHabitList, nextPage } =
-        await habitService.getExpiredHabitList(userId, limit, status, localTime, page);
+        await habitService.getExpiredHabitList(
+          userId,
+          limit,
+          status,
+          localTime,
+          page
+        );
 
       res.json({
         habitList: expiredHabitList,
@@ -44,7 +51,6 @@ exports.getHabitList = async (req, res, next) => {
 };
 
 exports.postNewHabit = async (req, res, next) => {
-  // req.body validation needed
   const { userId } = req.params;
   const { title, currentDate } = req.body;
 
@@ -74,7 +80,6 @@ exports.postNewHabit = async (req, res, next) => {
 };
 
 exports.updateHabitStatus = async (req, res, next) => {
-  //reqbody validation needed
   const { userId, habitId } = req.params;
   const { currentLocalDate } = req.body;
 
@@ -92,7 +97,7 @@ exports.updateHabitStatus = async (req, res, next) => {
     );
 
     res.json({
-      result: "success",
+      result: RESPONSE_MESSAGE.success,
     });
   } catch (err) {
     const error = createError(500, err, {
@@ -116,7 +121,7 @@ exports.deleteHabit = async (req, res, next) => {
     const response = await habitService.deleteHabit(habitId, userId);
 
     res.json({
-      result: "success",
+      result: RESPONSE_MESSAGE.success,
     });
   } catch (err) {
     const error = createError(500, err, {
