@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Types;
 const createError = require("http-errors");
 
-const habitService = require("../services/habit");
 const {
   AUTH_MESSAGE,
   COMMON_MESSAGE,
 } = require("../../constants/dataValidationMessage");
+const habitService = require("../services/habit");
 
 exports.getHabitList = async (req, res, next) => {
   const { userId } = req.params;
@@ -28,7 +28,13 @@ exports.getHabitList = async (req, res, next) => {
     } else {
       const { limit, status, localTime, page } = req.query;
       const { expiredHabitList, nextPage } =
-        await habitService.getExpiredHabitList(userId, limit, status, localTime, page);
+        await habitService.getExpiredHabitList(
+          userId,
+          limit,
+          status,
+          localTime,
+          page
+        );
 
       res.json({
         habitList: expiredHabitList,

@@ -127,7 +127,7 @@ exports.updateHabitStatus = async (currentLocalDate, habitId) => {
   });
 
   let currentStatus = HABIT_NUMBERS.initialStatus;
-  updatedHabitList.forEach(({ date, isChecked }) => {
+  updatedHabitList.forEach(({ isChecked }) => {
     if (isChecked) currentStatus++;
   });
 

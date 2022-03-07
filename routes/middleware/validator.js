@@ -17,6 +17,6 @@ const validator = (validations) => {
     const error = createError(400, { message: errors.array()[0].msg });
     next(error);
   };
-}
+};
 
 module.exports = validator;
