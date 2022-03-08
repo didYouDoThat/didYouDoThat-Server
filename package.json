@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "prepare": "husky install",
+    "create-hook": "husky add .husky/pre-commit \"npm test\"",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -36,5 +37,10 @@
     "*.js": [
       "eslint --fix"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
