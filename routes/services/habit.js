@@ -4,6 +4,7 @@ const CatImage = require("../../models/CatImage");
 
 const { HABIT_NUMBERS } = require("../../constants/numbers");
 const makeDateListData = require("../../utils/makeDateListData");
+const makeClientData = require("../../utils/makeClientData");
 
 exports.getHabitList = async (userId) => {
   const targetUser = await User.findById(userId)
@@ -13,19 +14,7 @@ exports.getHabitList = async (userId) => {
       populate: { path: "catImage.catType" },
     });
 
-  const activeHabits = targetUser.habits.map((activeHabit) => {
-    return {
-      id: activeHabit._id,
-      title: activeHabit.title,
-      endDate: activeHabit.dateList[activeHabit.dateList.length - 1].date,
-      dateList: activeHabit.dateList,
-      catImage:
-        activeHabit.catImage.catType.catStatusList[
-          activeHabit.catImage.catStatus
-        ],
-      status: activeHabit.catImage.catStatus,
-    };
-  });
+  const activeHabits = targetUser.habits.map(makeClientData);
 
   return activeHabits;
 };
@@ -55,19 +44,7 @@ exports.getExpiredHabitList = async (
           : habit.catImage.catStatus !== HABIT_NUMBERS.habitSuccessStatus)
       );
     })
-    .map((expiredHabit) => {
-      return {
-        id: expiredHabit._id,
-        title: expiredHabit.title,
-        endDate: expiredHabit.dateList[expiredHabit.dateList.length - 1].date,
-        dateList: expiredHabit.dateList,
-        catImage:
-          expiredHabit.catImage.catType.catStatusList[
-            expiredHabit.catImage.catStatus
-          ],
-        status: expiredHabit.catImage.catStatus,
-      };
-    });
+    .map(makeClientData);
 
   const finalExpiredHabitList = expiredHabitList.slice(
     Number(limit) * (Number(page) - 1),
