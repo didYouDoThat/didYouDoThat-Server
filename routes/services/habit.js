@@ -59,10 +59,11 @@ exports.getExpiredHabitList = async (
   };
 };
 
-exports.postNewHabit = async (title, currentDate, userId) => {
+exports.postNewHabit = async (title, localTimeOffset, userId) => {
   const catImageList = await CatImage.find().lean().exec();
   const catImageIndex = Math.floor(Math.random() * 7);
-  const dateList = makeDateListData(currentDate);
+  const currentDate = new Date();
+  const dateList = makeDateListData(currentDate, localTimeOffset);
 
   const newHabit = await Habit.create({
     author: userId,

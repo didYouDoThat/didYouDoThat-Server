@@ -52,7 +52,7 @@ exports.getHabitList = async (req, res, next) => {
 
 exports.postNewHabit = async (req, res, next) => {
   const { userId } = req.params;
-  const { title, currentDate } = req.body;
+  const { title, localTimeOffset } = req.body;
 
   if (!ObjectId.isValid(userId)) {
     const error = createError(400, { message: AUTH_MESSAGE.invalidUser });
@@ -64,7 +64,7 @@ exports.postNewHabit = async (req, res, next) => {
   try {
     const newHabit = await habitService.postNewHabit(
       title,
-      currentDate,
+      localTimeOffset,
       userId
     );
 
