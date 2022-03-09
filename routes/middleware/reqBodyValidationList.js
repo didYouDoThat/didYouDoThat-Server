@@ -4,9 +4,9 @@ const { REQBODY_MESSAGE } = require("../../constants/dataValidationMessage");
 
 const checkNewHabitInput = [
   body("title", REQBODY_MESSAGE.habitTitleError).exists().isString(),
-  body("currentDate", REQBODY_MESSAGE.habitCurrentDateError)
+  body("localTimeOffset", REQBODY_MESSAGE.habitCurrentDateError)
     .exists()
-    .isISO8601(),
+    .isNumeric(),
 ];
 
 const checkUpdateHabit = [
