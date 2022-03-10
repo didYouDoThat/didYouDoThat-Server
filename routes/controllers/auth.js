@@ -13,7 +13,6 @@ exports.getLogin = async (req, res, next) => {
       expiresIn: TIME_NUMBERS.accessTokenExpiredTime,
     });
 
-    console.log("hello~~");
     res.json({
       user: {
         id,
