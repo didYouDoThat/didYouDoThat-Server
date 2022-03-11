@@ -84,8 +84,17 @@ exports.postNewHabit = async (title, localTimeOffset, userId) => {
   };
 };
 
-exports.updateHabitStatus = async (currentLocalDate, habitId) => {
-  const localDate = new Date(currentLocalDate);
+exports.updateHabitStatus = async (
+  currentLocalDate,
+  localTimeOffset,
+  habitId
+) => {
+  const localTimeInDateForm = new Date(currentLocalDate);
+  const localDate = new Date(
+    localTimeInDateForm.setHours(
+      localTimeInDateForm.getHours() + localTimeOffset
+    )
+  );
   const targetHabit = await Habit.findById(habitId).lean().exec();
 
   const updatedHabitList = targetHabit.dateList.map((dateData) => {

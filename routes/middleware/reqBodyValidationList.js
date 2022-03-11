@@ -13,6 +13,9 @@ const checkUpdateHabit = [
   body("currentLocalDate", REQBODY_MESSAGE.updateHabitDateError)
     .exists()
     .isISO8601(),
+  body("localTimeOffset", REQBODY_MESSAGE.habitCurrentDateError)
+    .exists()
+    .isNumeric(),
 ];
 
 module.exports = {

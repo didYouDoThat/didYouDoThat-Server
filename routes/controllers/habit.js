@@ -81,7 +81,7 @@ exports.postNewHabit = async (req, res, next) => {
 
 exports.updateHabitStatus = async (req, res, next) => {
   const { userId, habitId } = req.params;
-  const { currentLocalDate } = req.body;
+  const { currentLocalDate, localTimeOffset } = req.body;
 
   if (!ObjectId.isValid(userId) || !ObjectId.isValid(habitId)) {
     const error = createError(400, { message: AUTH_MESSAGE.invalidObjectIds });
@@ -93,6 +93,7 @@ exports.updateHabitStatus = async (req, res, next) => {
   try {
     const updatedStatus = await habitService.updateHabitStatus(
       currentLocalDate,
+      localTimeOffset,
       habitId
     );
 
