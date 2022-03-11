@@ -15,7 +15,7 @@ exports.SCHEMA_MESSAGE = {
 
 exports.REQBODY_MESSAGE = {
   habitTitleError: "Title should be string.",
-  habitCurrentDateError: "CurrentData should be string.",
+  habitLocalTimeOffsetError: "localTimeOffset should be number.",
   updateHabitDateError: "CurrentLocalDate should be ISO string.",
 };
 
