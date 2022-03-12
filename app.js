@@ -14,9 +14,11 @@ mongooseLoader();
 
 const app = express();
 
-app.use(cors({
-  credentials: true,
-}));
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -34,6 +36,7 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
+  console.error(err);
   res.status(err.status || 500);
   res.render("error");
 });
