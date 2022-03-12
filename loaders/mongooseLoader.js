@@ -6,7 +6,7 @@ const connectMongodb = async () => {
     const mongoServer = await MongoMemoryServer.create();
 
     const mongoURI =
-      process.env.NODE_ENV === "test"
+      process.env.NODE_ENV === "development"
         ? mongoServer.getUri()
         : process.env.MONGO_DB_URI;
     await mongoose.connect(mongoURI);

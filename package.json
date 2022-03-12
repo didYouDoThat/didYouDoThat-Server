@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "lint-staged": "lint-staged",
-    "test": "NODE_ENV=test mocha spec --exit"
+    "test": "NODE_ENV=development mocha spec --exit"
   },
   "dependencies": {
     "cookie-parser": "~1.4.6",
