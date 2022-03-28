@@ -6,31 +6,8 @@ const jwt = require("jsonwebtoken");
 const app = require("../app");
 const User = require("../models/User");
 const Habit = require("../models/Habit");
-const CatImage = require("../models/CatImage");
 
-describe("Route Test", function () {
-  this.timeout(10000);
-
-  const mongoose = require("mongoose");
-  const db = mongoose.connection;
-  const sampleCatImage = require("../models/sampleJSON/catImages.json");
-
-  const storeMockCatImages = () => {
-    sampleCatImage.forEach(async (catImage) => {
-      await new CatImage(catImage).save();
-    });
-  };
-
-  before((done) => {
-    (function checkDatabaseConnection() {
-      if (db.readyState === 1) {
-        return done();
-      }
-
-      setTimeout(checkDatabaseConnection, 1000);
-    })();
-  });
-
+describe("Route Test", () => {
   describe("Setting up for tests", () => {
     let newUser;
     let newUserId;
@@ -45,13 +22,11 @@ describe("Route Test", function () {
       newUserId = newUser._id;
 
       newUserToken = jwt.sign({ newUserId }, process.env.SECRET_KEY);
-      storeMockCatImages();
     });
 
     after(async () => {
       await User.findOneAndDelete({ email: "mock@gmail.com" });
       await Habit.findOneAndDelete({ author: newUser._id });
-      await CatImage.deleteMany();
     });
 
     const mockHabit = {
