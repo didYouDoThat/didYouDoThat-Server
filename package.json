@@ -19,10 +19,9 @@
     "google-auth-library": "^7.14.0",
     "http-errors": "~2.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb-memory-server": "^8.4.0",
     "mongoose": "^6.2.4",
     "morgan": "~1.10.0",
-    "npm-check-updates": "^12.5.2"
+    "npm-check-updates": "^12.5.4"
   },
   "devDependencies": {
     "chai": "^4.3.6",
